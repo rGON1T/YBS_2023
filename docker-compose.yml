@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  app:
+    container_name: app
+    build: .
+    env_file:
+      - .env-non-dev
+#    command: ['sh','docker/s.sh']
+    ports:
+      - 8080:8080
+    restart: always
+    depends_on:
+      - db
+    links:
+      - db
+    networks:
+      - enrollment
+
+
+  db:
+    container_name: db
+    image: postgres:15.2-alpine
+    restart: always
+    env_file:
+      - .env-non-dev
+    networks:
+      - enrollment
+
+
+networks:
+  enrollment:
+    driver: bridge
