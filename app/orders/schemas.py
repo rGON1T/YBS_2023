@@ -28,7 +28,6 @@ class OrderDto(BaseModel):
 
     _validate_hours = validator('delivery_hours', allow_reuse=True, each_item=True, always=True)(check_time_format)
 
-    # _validate_complete_time = validator('complete_time', allow_reuse=True, always=True)(check_datetime_format)
 
     class Config:
         orm_mode = True
